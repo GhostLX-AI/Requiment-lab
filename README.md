@@ -82,7 +82,17 @@
 
 ### 2、类图
 
-![studentms Class Diagram](studentms Class Diagram.svg)
+![studentms Class Diagram](studentms_Class_Diagram.svg)
+
+
+
+
+
+
+
+
+
+
 
 
 
