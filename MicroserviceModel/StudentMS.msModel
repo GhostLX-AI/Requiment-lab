@@ -1,0 +1,370 @@
+MicroServiceModel StudentMS {
+	MicroService TeacherService {
+		ProvidedInterface createCourse{
+			[Operation]
+			createCourse
+			CallChain createCourse {
+				service StudentService : StudentService {
+					Message 1 to StudentService {
+						operation manageCourse
+					}
+				}
+				service StudentService : StudentService {
+					Message 2 {
+						operation manageCourse
+					}
+				}
+			}
+		}
+		ProvidedInterface queryCourse{
+			[Operation]
+			queryCourse
+			CallChain queryCourse {
+				service StudentService : StudentService {
+					Message 1 {
+						operation manageCourse
+					}
+				}
+			}
+		}
+		ProvidedInterface queryStudent{
+			[Operation]
+			queryStudent
+		}
+		ProvidedInterface manageGrade{
+			[Operation]
+			createGrade
+			queryGrade
+			updateGrade
+			modifyGrade
+		}
+		ProvidedInterface manageStudent{
+			[Operation]
+			createStudent
+			queryStudent
+			updateStudent
+			modifyStudent
+		}
+		ProvidedInterface manageTeacher{
+			[Operation]
+			createTeacher
+			queryTeacher
+			updateTeacher
+			modifyTeacher
+		}
+		RequiredInterface manageCourse
+		DomainModel TeacherService {
+			 Entity User {
+				Id : String
+				Name : String
+				[Refer]
+			}
+			@AutoCRUD Entity Teacher {
+				[Refer]
+			}
+			@AutoCRUD Entity Student {
+				[Refer]
+			}
+		}
+	}
+	MicroService StudentService {
+		ProvidedInterface queryGrade{
+			[Operation]
+			queryGrade
+			CallChain queryGrade {
+				service TeacherService : TeacherService {
+					Message 1 to AdministratorService {
+						operation manageStudent
+					}
+				}
+				service AdministratorService : AdministratorService {
+					Message 2 {
+						operation manageGrade
+					}
+				}
+			}
+		}
+		ProvidedInterface selectCourse{
+			[Operation]
+			selectCourse
+		}
+		ProvidedInterface manageCourse{
+			[Operation]
+			createCourse
+			queryCourse
+			updateCourse
+			modifyCourse
+		}
+		RequiredInterface manageCourseClassroomRelation
+		RequiredInterface manageSelectCourseRecord
+		RequiredInterface manageStudent
+		RequiredInterface manageGrade
+		DomainModel StudentService {
+			 Entity Administrator {
+				[Refer]
+			}
+			@AutoCRUD Entity Classroom {
+				Id : String
+				Name : String
+				Position : String
+				[Refer]
+				ClassroomtoCourse : Course  Association
+			}
+			@AutoCRUD Entity Course {
+				Id : String
+				Name : String
+				Teacher : String
+				[Refer]
+			}
+		}
+	}
+	MicroService AdministratorService {
+		ProvidedInterface queryTeacher{
+			[Operation]
+			queryTeacher
+			CallChain queryTeacher {
+				service TeacherService : TeacherService {
+					Message 1 {
+						operation manageTeacher
+					}
+				}
+			}
+		}
+		ProvidedInterface deleteCourse{
+			[Operation]
+			deleteCourse
+			CallChain deleteCourse {
+				service StudentService : StudentService {
+					Message 1 to StudentService {
+						operation manageCourse
+					}
+				}
+				service StudentService : StudentService {
+					Message 2 {
+						operation manageCourse
+					}
+				}
+			}
+		}
+		ProvidedInterface manageTeacher{
+			[Operation]
+			createTeacher
+			queryTeacher
+			updateTeacher
+			modifyTeacher
+		}
+		ProvidedInterface deleteTeacher{
+			[Operation]
+			deleteTeacher
+			CallChain deleteTeacher {
+				service TeacherService : TeacherService {
+					Message 1 to TeacherService {
+						operation manageTeacher
+					}
+				}
+				service TeacherService : TeacherService {
+					Message 2 {
+						operation manageTeacher
+					}
+				}
+			}
+		}
+		ProvidedInterface modifyStudent{
+			[Operation]
+			modifyStudent
+			CallChain modifyStudent {
+				service TeacherService : TeacherService {
+					Message 1 {
+						operation manageStudent
+					}
+				}
+			}
+		}
+		ProvidedInterface createClassroom{
+			[Operation]
+			createClassroom
+		}
+		ProvidedInterface manageClassroom{
+			[Operation]
+			createClassroom
+			queryClassroom
+			updateClassroom
+			modifyClassroom
+		}
+		ProvidedInterface deleteStudent{
+			[Operation]
+			deleteStudent
+			CallChain deleteStudent {
+				service TeacherService : TeacherService {
+					Message 1 to TeacherService {
+						operation manageStudent
+					}
+				}
+				service TeacherService : TeacherService {
+					Message 2 {
+						operation manageStudent
+					}
+				}
+			}
+		}
+		ProvidedInterface modifyClassroom{
+			[Operation]
+			modifyClassroom
+		}
+		ProvidedInterface manageStudent{
+			[Operation]
+			createStudent
+			queryStudent
+			updateStudent
+			modifyStudent
+		}
+		ProvidedInterface createTeacher{
+			[Operation]
+			createTeacher
+			CallChain createTeacher {
+				service TeacherService : TeacherService {
+					Message 1 to TeacherService {
+						operation manageTeacher
+					}
+				}
+				service TeacherService : TeacherService {
+					Message 2 {
+						operation manageTeacher
+					}
+				}
+			}
+		}
+		ProvidedInterface modifyGrade{
+			[Operation]
+			modifyGrade
+			CallChain modifyGrade {
+				service TeacherService : TeacherService {
+					Message 1 to StudentService {
+						operation manageStudent
+					}
+				}
+				service StudentService : StudentService {
+					Message 2 {
+						operation manageCourse
+					}
+				}
+			}
+		}
+		ProvidedInterface modifyTeacher{
+			[Operation]
+			modifyTeacher
+			CallChain modifyTeacher {
+				service TeacherService : TeacherService {
+					Message 1 {
+						operation manageTeacher
+					}
+				}
+			}
+		}
+		ProvidedInterface deleteClassroom{
+			[Operation]
+			deleteClassroom
+		}
+		ProvidedInterface queryClassroom{
+			[Operation]
+			queryClassroom
+		}
+		ProvidedInterface modifyCourse{
+			[Operation]
+			modifyCourse
+			CallChain modifyCourse {
+				service StudentService : StudentService {
+					Message 1 to TeacherService {
+						operation manageCourse
+					}
+				}
+				service TeacherService : TeacherService {
+					Message 2 {
+						operation manageTeacher
+					}
+				}
+			}
+		}
+		ProvidedInterface createStudent{
+			[Operation]
+			createStudent
+			CallChain createStudent {
+				service TeacherService : TeacherService {
+					Message 1 to TeacherService {
+						operation manageStudent
+					}
+				}
+				service TeacherService : TeacherService {
+					Message 2 {
+						operation manageStudent
+					}
+				}
+			}
+		}
+		ProvidedInterface enterGrade{
+			[Operation]
+			enterGrade
+			CallChain enterGrade {
+				service TeacherService : TeacherService {
+					Message 1 to StudentService {
+						operation manageStudent
+					}
+				}
+				service StudentService : StudentService {
+					Message 2 {
+						operation manageCourse
+					}
+				}
+			}
+		}
+		ProvidedInterface manageCourse{
+			[Operation]
+			createCourse
+			queryCourse
+			updateCourse
+			modifyCourse
+		}
+		ProvidedInterface manageCourseClassroomRelation{
+			[Operation]
+			createCourseClassroomRelation
+			queryCourseClassroomRelation
+			updateCourseClassroomRelation
+			modifyCourseClassroomRelation
+		}
+		ProvidedInterface manageSelectCourseRecord{
+			[Operation]
+			createSelectCourseRecord
+			querySelectCourseRecord
+			updateSelectCourseRecord
+			modifySelectCourseRecord
+		}
+		ProvidedInterface manageGrade{
+			[Operation]
+			createGrade
+			queryGrade
+			updateGrade
+			modifyGrade
+		}
+		RequiredInterface manageStudent
+		RequiredInterface manageCourse
+		RequiredInterface manageTeacher
+		DomainModel AdministratorService {
+			@AutoCRUD Entity SelectCourseRecord {
+				Course : String
+				Student : String
+				[Refer]
+			}
+			@AutoCRUD Entity CourseClassroomRelation {
+				Course : String
+				Classroom : String
+				[Refer]
+			}
+			@AutoCRUD Entity Grade {
+				Student : String
+				Course : String
+				Grade : Real
+				[Refer]
+			}
+		}
+	}
+}
