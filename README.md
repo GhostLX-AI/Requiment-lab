@@ -38,7 +38,7 @@
 
 ### 1、用例图
 
-![Use Case Diagram](img/Use Case Diagram.svg)
+![Use Case Diagram](Use Case Diagram.svg)
 
 ### 2、系统顺序图
 
@@ -48,11 +48,11 @@
 2. 选择教室地点
 3. 选择上课时间
 
-![CreateCourseSSD](img\CreateCourseSSD.svg)
+![CreateCourseSSD](CreateCourseSSD.svg)
 
 ### 3、概念类图
 
-![Conceptual Class Diagram](img\Conceptual Class Diagram.svg)
+![Conceptual Class Diagram](Conceptual Class Diagram.svg)
 
 
 
@@ -70,19 +70,19 @@
 
 #### 1.1
 
-![studentms](img\studentms.svg)
+![studentms](studentms.svg)
 
 
 
 #### 1.2
 
-![MicroServiceModel](img\MicroServiceModel.svg)
+![MicroServiceModel](MicroServiceModel.svg)
 
 
 
 ### 2、类图
 
-![studentms Class Diagram](img\studentms Class Diagram.svg)
+![studentms Class Diagram](studentms Class Diagram.svg)
 
 
 
